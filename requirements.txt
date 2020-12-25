@@ -1,0 +1,9 @@
+pytz
+aiosqlite
+discord.py[voice] >= 1.5.1
+aiohttp
+bs4
+aiosqlite
+lxml
+hcskr >= 1.8.0
+jishaku
