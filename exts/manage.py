@@ -36,12 +36,12 @@ class NoName(commands.Cog, name="Management"):
                     success += 1
                     if row[8] == "true":
                         embed = discord.Embed(title="완료했어! 좋은 하루 보내.", description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```", color=0x1F44BF, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.avatar_url_as(format="png", size=2048))
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         await channel.send(user.mention, embed=embed)
                 else:
                     embed = discord.Embed(title="미안해, 뭔가 잘못된 거 같아.", description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.avatar_url_as(format="png", size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     await channel.send(user.mention, embed=embed)
             await debug.send(f"다 됐어! 이번 시도에서는...\n{len(rows)}명을 시도했어.\n성공은 {success}명, 실패는 {len(rows) - success}명이야!")
@@ -129,7 +129,7 @@ class NoName(commands.Cog, name="Management"):
                     embed = discord.Embed(title="안녕, 만나서 반가워!", description=f"{member.mention}이라고 부르면 될까?\n이 서버는 제한된 유저만이 접근할 수 있어서, 승인이 꼭 필요해.", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                     embed.add_field(name="초대한 사람이 뭔가 알려주던데.. 그건 뭐에요?", value="아, 코드를 받았구나! 그럼 빠르게 넘어가보자고! <#719058190175698964> 채널에서 `라더님 리퀘 단어` 명령어로 나한테 알려줄래?")
                     embed.add_field(name="저는 그런 거 못 받았어요! 어떻게 해요?", value="그럼 서버 관리자가 너를 확인하고 역할을 부여해줄 때까지만 기다려줘. 아마 관리자가 곧 확인하고 너에게 부여해줄 거야.")
-                    embed.set_thumbnail(url=self.SMT.avatar_url_as(format="png", size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     await member.send(member.mention, embed=embed)
                 except discord.Forbidden:
