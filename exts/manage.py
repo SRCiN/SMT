@@ -179,32 +179,31 @@ class Management(commands.Cog, name="Management"):
                         await queue.delete()
                         info.append(str(msg.content))
                         i += 1
-                asdf = await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 잠시만, 확인 좀 해보고.\n자가진단 테스트 : <a:cs_wait:659355470418411521> 진행 중")
+                asdf = await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 잠시만, 확인 좀 해보고.\n자가진단 테스트 및 정보 암호화 : <a:cs_wait:659355470418411521> 진행 중")
                 try:
-                    hcs = await hcskr.asyncSelfCheck(name=info[0], birth=info[1], level=info[2], area=info[3], schoolname=info[4], customloginname=info[5], password=info[6])
+                    hcs_token = await hcskr.asyncGenerateToken(name=info[0], birth=info[1], level=info[2], area=info[3], schoolname=info[4], customloginname=info[5], password=info[6])
                 except Exception as e:
                     debug = self.SMT.get_channel(783621627875164230)
                     await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
-                    await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```", delete_after=5)
+                    await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```", delete_after=5)
                 else:
                     await asyncio.sleep(1)
-                    if hcs['code'] != "SUCCESS":
+                    if hcs_token['code'] != "SUCCESS":
                         debug = self.SMT.get_channel(783621627875164230)
-                        await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{hcs['code']} : {hcs['message']}```")
-                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 : <:cs_no:659355468816187405> 실패\n \n내가 생각했던 것과는 뭔가 다른 답을 받았네. ```{hcs['code']} : {hcs['message']}```", delete_after=5)
+                        await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{hcs_token['code']} : {hcs_token['message']}```")
+                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n내가 생각했던 것과는 뭔가 다른 답을 받았네. ```{hcs_token['code']} : {hcs_token['message']}```", delete_after=5)
                     else:
-                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 다 됐는데..\n자가진단 테스트 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중")
+                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 다 됐는데..\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중")
                         await asyncio.sleep(1)
                         try:
-                            hcs_token = await hcskr.asyncGenerateToken(name=info[0], birth=info[1], level=info[2], area=info[3], schoolname=info[4], customloginname=info[5], password=info[6])
                             await c.execute(f"INSERT INTO health(user_id, token, notify) VALUES('{ctx.author.id}', '{hcs_token['token']}', 'true')")
                             await o.commit()
                         except Exception as e:
                             debug = self.SMT.get_channel(783621627875164230)
                             await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
-                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n음, 등록이 안 된 거 같네. 다시 해볼래? ```{e}```", delete_after=5)
+                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n음, 등록이 안 된 거 같네. 다시 해볼래? ```{e}```", delete_after=5)
                         else:
-                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 다 됐어!\n자가진단 테스트 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 등록 다 됐어! 매일 7시 30분에 자가진단을 내가 대신 해줄거야.", delete_after=5)
+                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 다 됐어!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 등록 다 됐어! 매일 7시 30분에 자가진단을 내가 대신 해줄거야.", delete_after=5)
             else:
                 await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 이미 등록해둔 거로 기억하는데.. 프로필이 바뀌었으면 삭제하고 다시 등록해줄래?")
         elif todo == "삭제":
