@@ -36,12 +36,12 @@ class Management(commands.Cog, name="Management"):
                     success += 1
                     if row[8] == "true":
                         embed = discord.Embed(title="완료했어! 좋은 하루 보내.", description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```", color=0x1F44BF, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format="png", size=2048))
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         await channel.send(user.mention, embed=embed)
                 else:
                     embed = discord.Embed(title="미안해, 뭔가 잘못된 거 같아.", description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format="png", size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     await channel.send(user.mention, embed=embed)
             await debug.send(f"다 됐어! 이번 시도에서는...\n{len(rows)}명을 시도했어.\n성공은 {success}명, 실패는 {len(rows) - success}명이야!")
@@ -72,7 +72,7 @@ class Management(commands.Cog, name="Management"):
             await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 아, 그 사람은 나도 못 바꿔줘. 유일하게 내가 바꾸지 못하는 사람이라 해야하나?")
         else:
             embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"다른 사람의 닉네임을 바꿀 때는 조심하는 게 좋을텐데.\n{member.mention}의 닉네임을 **{name}**으로 바꿔도 되는 거 맞지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-            embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+            embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
             embed.set_footer(text="Project. SMT v1.2.1")
             msg = await ctx.send(embed=embed)
             await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -98,7 +98,7 @@ class Management(commands.Cog, name="Management"):
     @commands.has_role(719061173567488010)
     async def _freeze(self, ctx):
         embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"이 채널, 정말 메시지 기능을 제한해도 괜찮은거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
         embed.set_footer(text="Project. SMT v1.2.1")
         msg = await ctx.send(embed=embed)
         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -132,7 +132,7 @@ class Management(commands.Cog, name="Management"):
                     embed = discord.Embed(title="안녕, 만나서 반가워!", description=f"{member.mention}이라고 부르면 될까?\n이 서버는 제한된 유저만이 접근할 수 있어서, 승인이 꼭 필요해.", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                     embed.add_field(name="초대한 사람이 뭔가 알려주던데.. 그건 뭐에요?", value="아, 코드를 받았구나! 그럼 빠르게 넘어가보자고! <#719058190175698964> 채널에서 `라더님 리퀘 단어` 명령어로 나한테 알려줄래?")
                     embed.add_field(name="저는 그런 거 못 받았어요! 어떻게 해요?", value="그럼 서버 관리자가 너를 확인하고 역할을 부여해줄 때까지만 기다려줘. 아마 관리자가 곧 확인하고 너에게 부여해줄 거야.")
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format="png", size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     await member.send(member.mention, embed=embed)
                 except discord.Forbidden:
@@ -290,7 +290,7 @@ class Management(commands.Cog, name="Management"):
                 await ctx.send(f":hourglass: {ctx.author.mention} - 가끔은 느린 게 필요할 때도 있겠지. **{number}**초 정도면 적당한 것 같아?")
             else:
                 embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"보통 그렇게까지 느리게 할 필요는 없긴 한데, 하겠다면 말리진 않을게.\n진짜로 이 채널의 딜레이를 **{number}**초로 바꿀거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                 embed.set_footer(text="Project. SMT v1.2.1")
                 msg = await ctx.send(embed=embed)
                 await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -393,7 +393,7 @@ class Management(commands.Cog, name="Management"):
             if value is not None:
                 if not rows:
                     embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -421,7 +421,7 @@ class Management(commands.Cog, name="Management"):
                 if rows:
                     if rows[0][3] != 'true':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -451,7 +451,7 @@ class Management(commands.Cog, name="Management"):
             if rows:
                 if rows[0][3] != 'true':
                     embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어봐도 모른 척 하면 되는거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -480,7 +480,7 @@ class Management(commands.Cog, name="Management"):
                 if rows:
                     if rows[0][3] != 'true':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 아무도 바꾸지 못하게 할건데, 괜찮아?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -511,7 +511,7 @@ class Management(commands.Cog, name="Management"):
                 if rows:
                     if rows[0][3] != 'false':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(static_format='png', size=2048))
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
