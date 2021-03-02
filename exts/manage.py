@@ -57,17 +57,6 @@ class Management(commands.Cog, name="Management"):
         print("봇 준비 대기 중")
         await self.SMT.wait_until_ready()
 
-    @commands.command(name="콘솔")
-    @commands.has_role(792355448765415456)
-    async def _console(self, ctx, *, cmd):
-        if ctx.channel.id == 789345376461127711:
-            if cmd.startswith("stop"):
-                await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - Discord에서는 이 명령어를 지원하지 않네.\n```{cmd}```")
-            else:
-                await ctx.send(f"<:cs_console:659355468786958356> {ctx.author.mention} - 서버에서 명령어를 실행했어! 다른 필요한 거 있어?\n```{cmd}```")
-        else:
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 서버 명령어 실행은 <#789345376461127711> 채널에서 해줄래?")
-
     @commands.command(name="닉네임")
     @commands.has_role(719061173567488010)
     async def _force(self, ctx, member: discord.Member, *, name):
