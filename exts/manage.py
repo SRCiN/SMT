@@ -215,7 +215,7 @@ class Management(commands.Cog, name="Management"):
                 await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 삭제해주고는 싶은데, 네 정보가 여기에는 없는 거 같아.")
         elif todo == "알림":
             if rows:
-                if rows[0][8] == "true":
+                if rows[0][2] == "true":
                     await c.execute(f"UPDATE health SET notify = 'false' WHERE user_id = '{ctx.author.id}'")
                     await o.commit()
                     await ctx.send(f"<:cs_off:659355468887490560> {ctx.author.mention} - 아, 알림 안 받을 거야? 체크해둘게.")
