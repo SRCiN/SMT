@@ -21,7 +21,7 @@ class Management(commands.Cog, name="Management"):
         time = utc.localize(now).astimezone(KST)
         kortime = time.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")
         debug = self.SMT.get_channel(783621627875164230)
-        if "07시 30분" in kortime:
+        if "07시 00분" in kortime:
             await debug.send("시간 됐다. 그럼 시작해볼까?")
             o = await aiosqlite.connect("SMT.db")
             c = await o.cursor()
