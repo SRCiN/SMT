@@ -4,5 +4,5 @@ bs4
 lxml
 pytz
 aiosqlite
-hcskr == 1.8.0
+hcskr >= 1.9.2
 jishaku
