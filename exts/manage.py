@@ -48,7 +48,7 @@ class Management(commands.Cog, name="Management"):
                     try:
                         await user.send(user.mention, embed=embed)
                     except:
-                        print("DM Failed.")
+                        print("DM X")
             await debug.send(f"다 됐어! 이번 시도에서는...\n{len(rows)}명을 시도했어.\n성공은 {success}명, 실패는 {len(rows) - success}명이야!")
             await o.close()
 
