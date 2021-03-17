@@ -3,6 +3,10 @@ from discord.ext import commands
 import aiosqlite
 import asyncio
 
+class Commands(commands.Cog, name="커스텀 커맨드"):
+    def __init__(self, SMT):
+        self.SMT = SMT
+
     @commands.command(name="커맨드")
     async def _command_management(self, ctx, todo, name, *, value: typing.Optional[str] = None):
         if "'" in ctx.message.content or '"' in ctx.message.content or "\\" in ctx.message.content or "@everyone" in ctx.message.content or "@here" in ctx.message.content:
