@@ -13,7 +13,7 @@ class Miya(commands.Cog, name="미야 관리"):
             return
 
         now = datetime.datetime.utcnow()
-        delay = now - member.joined_at
+        delay = now - msg.author.joined_at
         limit = datetime.datetime(2020, 8, 22) - datetime.datetime(2020, 8, 17)
         text = str(delay).split(".")[0]
         if delay <= limit:
@@ -39,7 +39,7 @@ class Miya(commands.Cog, name="미야 관리"):
                     await msg.guild.ban(msg.author, delete_message_days=7, reason="서버 활동 기간이 5일 미만이고, 부적절한 언행을 사용했습니다.")
 
     @commands.Cog.listener()
-    async def on_member_join(member):
+    async def on_member_join(self, member):
         if member.bot:
             return
 
