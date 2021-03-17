@@ -180,4 +180,4 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             await o.close()
 
 def setup(SMT):
-    SMT.add_cog(Commmands(SMT))
+    SMT.add_cog(Commands(SMT))
