@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import aiosqlite
+import datetime
 
 class Miya(commands.Cog, name="미야 관리"):
     def __init__(self, SMT):
