@@ -22,7 +22,7 @@ class Management(commands.Cog, name="Management"):
         kortime = time.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")
         debug = self.SMT.get_channel(783621627875164230)
         if "07시 00분" in kortime:
-            await debug.send("7시 정기적 자가진단이 시작됩니다.")
+            await debug.send("시간 됐다. 그럼 시작해볼까?")
             o = await aiosqlite.connect("SMT.db")
             c = await o.cursor()
             await c.execute("SELECT * FROM health")
@@ -34,7 +34,7 @@ class Management(commands.Cog, name="Management"):
                 if hcs['code'] == "SUCCESS":
                     success += 1
                     if row[2] == "true":
-                        embed = discord.Embed(title="자가진단에 성공했어요!", description=f"교육청 서버의 응답 :\n```{hcs['code']} : {hcs['message']}```", color=0x06069C, timestamp=datetime.datetime.utcnow())
+                        embed = discord.Embed(title="완료했어! 좋은 하루 보내.", description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```", color=0x1F44BF, timestamp=datetime.datetime.utcnow())
                         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         try:
@@ -42,14 +42,14 @@ class Management(commands.Cog, name="Management"):
                         except:
                             print("DM Failed.")
                 else:
-                    embed = discord.Embed(title="자가진단 도중 문제가 발생했어요!", description=f"교육청 서버의 응답 :\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                    embed = discord.Embed(title="미안해, 뭔가 잘못된 거 같아.", description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                     embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     try:
                         await user.send(user.mention, embed=embed)
                     except:
-                        print("DM Failed.")
-            await debug.send(f"완료되었습니다!\n총 {len(rows)}명 중\n성공은 {success}명, 실패는 {len(rows) - success}명입니다.")
+                        print("DM X")
+            await debug.send(f"다 됐어! 이번 시도에서는...\n{len(rows)}명을 시도했어.\n성공은 {success}명, 실패는 {len(rows) - success}명이야!")
             await o.close()
 
     @health_check.before_loop
@@ -61,13 +61,13 @@ class Management(commands.Cog, name="Management"):
     @commands.has_role(719061173567488010)
     async def _force(self, ctx, member: discord.Member, *, name):
         if member == ctx.author:
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 자신의 닉네임은 변경할 수 없어요.")
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 미안, 너 스스로는 닉네임을 변경할 수 없어.")
         elif member == ctx.guild.owner:
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 서버 소유자의 닉네임은 변경할 수 없어요.")
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 아, 그 사람은 나도 못 바꿔줘. 유일하게 내가 바꾸지 못하는 사람이라 해야하나?")
         else:
-            embed = discord.Embed(title="다시 한 번 확인해주세요!", description=f"{member.mention}의 닉네임을 **{name}**으로 변경하는 것이 확실한가요?", color=0x06069C, timestamp=datetime.datetime.utcnow())
+            embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"다른 사람의 닉네임을 바꿀 때는 조심하는 게 좋을텐데.\n{member.mention}의 닉네임을 **{name}**으로 바꿔도 되는 거 맞지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
             embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-            embed.set_footer(text="Project. SMT v1.4")
+            embed.set_footer(text="Project. SMT v1.2.1")
             msg = await ctx.send(embed=embed)
             await msg.add_reaction("<:cs_yes:659355468715786262>")
             await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -82,18 +82,18 @@ class Management(commands.Cog, name="Management"):
                 if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
                     await member.edit(nick=name)
                     try:
-                        await member.send(f"<:cs_id:659355469034422282> {member.mention} - 관리자의 의해 당신의 이름이 **{name}**(으)로 변경되었어요!")
+                        await member.send(f"<:cs_id:659355469034422282> {member.mention} - 관리자에 의해 서버 내에서의 너의 이름이 **{name}**으로 바뀌었어!")
                     except:
                         channel = self.SMT.get_channel(783598891496767488)
-                        await channel.send(f"<:cs_id:659355469034422282> {member.mention} - 관리자에 의해 당신의 이름이 **{name}**(으)로 변경되었어요!")
-                    await ctx.send(f"<:cs_yes:659355468715786262> {ctx.author.mention} - **{member}**님의 이름을 성공적으로 **{name}**(으)로 변경했어요!")
+                        await channel.send(f"<:cs_id:659355469034422282> {member.mention} - 관리자에 의해 서버 내에서의 너의 이름이 **{name}**으로 바뀌었어!")
+                    await ctx.send(f"<:cs_yes:659355468715786262> {ctx.author.mention} - 일단은 하긴 했는데, **{member}**의 이름을 **{name}**(으)로 바꿔도 되는 거 맞아?")
 
     @commands.command(name="동결", aliases=["얼려", "얼려줘"])
     @commands.has_role(719061173567488010)
     async def _freeze(self, ctx):
-        embed = discord.Embed(title="다시 한 번 확인해주세요!", description=f"이 채널에 대한 모든 유저의 메시지 보내기 권한이 거부될거에요!", color=0x06069C, timestamp=datetime.datetime.utcnow())
+        embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"이 채널, 정말 메시지 기능을 제한해도 괜찮은거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-        embed.set_footer(text="Project. SMT v1.4")
+        embed.set_footer(text="Project. SMT v1.2.1")
         msg = await ctx.send(embed=embed)
         await msg.add_reaction("<:cs_yes:659355468715786262>")
         await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -108,7 +108,7 @@ class Management(commands.Cog, name="Management"):
             if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
                 overwrite = discord.PermissionOverwrite(read_messages=False, send_messages=False)
                 await ctx.channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-                await ctx.send(f":lock: {ctx.author.mention} - 채널이 잠겼어요. 특정한 유저를 제외한 모든 유저가 메시지를 보낼 수 없어요.")
+                await ctx.send(f":lock: {ctx.author.mention} - 음, 그래? 네가 괜찮다면야. 이 채널의 메시지 기능을 제한해둘게.")
                     
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -121,6 +121,16 @@ class Management(commands.Cog, name="Management"):
             if member.bot:
                 bot_role = member.guild.get_role(749214540327026719)
                 await member.add_roles(bot_role, reason="뭐야, 기계였잖아? 괜히 인사했네.")
+            else:
+                try:
+                    embed = discord.Embed(title="안녕, 만나서 반가워!", description=f"{member.mention}이라고 부르면 될까?\n이 서버는 제한된 유저만이 접근할 수 있어서, 승인이 꼭 필요해.", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                    embed.add_field(name="초대한 사람이 뭔가 알려주던데.. 그건 뭐에요?", value="아, 코드를 받았구나! 그럼 빠르게 넘어가보자고! <#719058190175698964> 채널에서 `라더님 리퀘 단어` 명령어로 나한테 알려줄래?")
+                    embed.add_field(name="저는 그런 거 못 받았어요! 어떻게 해요?", value="그럼 서버 관리자가 너를 확인하고 역할을 부여해줄 때까지만 기다려줘. 아마 관리자가 곧 확인하고 너에게 부여해줄 거야.")
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
+                    embed.set_footer(text="Project. SMT v1.2.1")
+                    await member.send(member.mention, embed=embed)
+                except discord.Forbidden:
+                    print("DM Failed.")
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
@@ -148,13 +158,13 @@ class Management(commands.Cog, name="Management"):
                 i = 0
                 while i < 7:
                     messages = [
-                        f":stopwatch: {ctx.author.mention} - 이름이 무엇인가요? Ex) 홍길동",
-                        f":stopwatch: {ctx.author.mention} - 생년월일이 어떻게 되시나요? Ex) 자신이 2020년 12월 6일생이라면, `201206`",
-                        f":stopwatch: {ctx.author.mention} - 학교급을 알려주시겠어요? Ex) 초등학교, 중학교, 고등학교 등",
-                        f":stopwatch: {ctx.author.mention} - 학교가 소속된 지역이 어디인가요? Ex) 서울, 경기, 제주 등",
-                        f":stopwatch: {ctx.author.mention} - 학교의 이름이 무엇인가요? Ex) 세모고등학교, 네모초등학교 등",
-                        f":stopwatch: {ctx.author.mention} - 수행자명을 무엇으로 할까요? Ex) 홍길동, [자동] 홍길동 등",
-                        f":stopwatch: {ctx.author.mention} - 비밀번호를 알려주시겠어요? Ex) 1234",
+                        f":stopwatch: {ctx.author.mention} - 이름이 뭐야? Ex) 홍길동",
+                        f":stopwatch: {ctx.author.mention} - 생일을 좀 말해줄래? Ex) 자신이 2020년 12월 6일생이라면, `201206`",
+                        f":stopwatch: {ctx.author.mention} - 학교급은 어떻게 돼? Ex) 초등학교, 중학교, 고등학교 등",
+                        f":stopwatch: {ctx.author.mention} - 학교 지역은 어디야? Ex) 서울, 경기, 제주 등",
+                        f":stopwatch: {ctx.author.mention} - 학교 이름을 좀 알려줄래? Ex) 세모고등학교, 네모초등학교 등",
+                        f":stopwatch: {ctx.author.mention} - 누가 수행했다고 적어줄까? Ex) 홍길동, [자동] 홍길동 등",
+                        f":stopwatch: {ctx.author.mention} - 자가진단을 해주기 위한 비밀번호를 말해줘. Ex) 1234",
                     ]
                     queue = await ctx.send(messages[i])
                     def check(msg):
@@ -169,21 +179,21 @@ class Management(commands.Cog, name="Management"):
                         await queue.delete()
                         info.append(str(msg.content))
                         i += 1
-                asdf = await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 자가진단 정보를 확인하고 있어요...\n자가진단 테스트 및 정보 암호화 : <a:cs_wait:659355470418411521> 진행 중")
+                asdf = await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 잠시만, 확인 좀 해보고.\n자가진단 테스트 및 정보 암호화 : <a:cs_wait:659355470418411521> 진행 중")
                 try:
                     hcs_token = await hcskr.asyncGenerateToken(name=info[0], birth=info[1], level=info[2], area=info[3], schoolname=info[4], customloginname=info[5], password=info[6])
                 except Exception as e:
                     debug = self.SMT.get_channel(783621627875164230)
                     await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
-                    await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 프로필 등록에 실패했어요!\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n오류가 발생했어요. ```{e}```", delete_after=5)
+                    await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```", delete_after=5)
                 else:
                     await asyncio.sleep(1)
                     if hcs_token['code'] != "SUCCESS":
                         debug = self.SMT.get_channel(783621627875164230)
                         await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{hcs_token['code']} : {hcs_token['message']}```")
-                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 프로필 등록에 실패했어요!\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n교육청 서버의 응답이 예상과 달라요.```{hcs_token['code']} : {hcs_token['message']}```", delete_after=5)
+                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n내가 생각했던 것과는 뭔가 다른 답을 받았네. ```{hcs_token['code']} : {hcs_token['message']}```", delete_after=5)
                     else:
-                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 완료되었어요, 잠시만요...\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중")
+                        await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 다 됐는데..\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중")
                         await asyncio.sleep(1)
                         try:
                             await c.execute(f"INSERT INTO health(user_id, token, notify) VALUES('{ctx.author.id}', '{hcs_token['token']}', 'true')")
@@ -191,39 +201,39 @@ class Management(commands.Cog, name="Management"):
                         except Exception as e:
                             debug = self.SMT.get_channel(783621627875164230)
                             await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
-                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 프로필 등록에 실패했어요!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n오류가 발생했어요. ```{e}```", delete_after=5)
+                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n음, 등록이 안 된 거 같네. 다시 해볼래? ```{e}```", delete_after=5)
                         else:
-                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 완료되었어요!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 아침 7시마다 자동으로 자가진단이 수행될 거에요.", delete_after=5)
+                            await asdf.edit(content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 다 됐어!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 등록 다 됐어! 매일 7시에 자가진단을 내가 대신 해줄거야.", delete_after=5)
             else:
-                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 이미 프로필이 존재해요. 자가진단 프로필은 한 계정당 하나만 등록할 수 있어요.")
+                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 이미 등록해둔 거로 기억하는데.. 프로필이 바뀌었으면 삭제하고 다시 등록해줄래?")
         elif todo == "삭제":
             if rows:
                 await c.execute(f"DELETE FROM health WHERE user_id = '{ctx.author.id}'")
                 await o.commit()
-                await ctx.send(f"<:cs_trash:659355468631769101> {ctx.author.mention} - 프로필이 삭제되었어요! 언제든지 다시 등록하실 수 있어요.")
+                await ctx.send(f"<:cs_trash:659355468631769101> {ctx.author.mention} - 더 이상 필요없는 기능이야? 삭제는 해뒀어. 언제든 다시 등록할 수 있어!")
             else:
-                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 당신의 계정은 자가진단 프로필이 존재하지 않아요.")
+                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 삭제해주고는 싶은데, 네 정보가 여기에는 없는 거 같아.")
         elif todo == "알림":
             if rows:
                 if rows[0][2] == "true":
                     await c.execute(f"UPDATE health SET notify = 'false' WHERE user_id = '{ctx.author.id}'")
                     await o.commit()
-                    await ctx.send(f"<:cs_off:659355468887490560> {ctx.author.mention} - 자가진단 DM 알림을 껐어요.")
+                    await ctx.send(f"<:cs_off:659355468887490560> {ctx.author.mention} - 아, 알림 안 받을 거야? 체크해둘게.")
                 else:
                     await c.execute(f"UPDATE health SET notify = 'true' WHERE user_id = '{ctx.author.id}'")
                     await o.commit()
-                    await ctx.send(f"<:cs_on:659355468682231810> {ctx.author.mention} - 자가진단 DM 알림을 켰어요.")
+                    await ctx.send(f"<:cs_on:659355468682231810> {ctx.author.mention} - 알았어, 아침에 자가진단 알림을 보내줄게!")
             else:
-                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 당신의 계정은 자가진단 프로필이 존재하지 않아요.")
+                await ctx.send(f"<:cs_id:659355469034422282> {ctx.author.mention} - 알림 설정은 먼저 네 프로필을 등록하고 바꿔줄래?")
         else:
-            raise commands.BadArgument
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 어, 그게 아니었던 것 같은데. 다시 생각해보는 건 어때?")
         await o.close()
 
     @commands.command(name="청소", aliases=["삭제"])
     @commands.has_role(719061173567488010)
     async def _purge(self, ctx, purge: int):
         if purge < 1 or purge > 100:
-            raise commands.BadArgument
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 어, 그게 아니었던 것 같은데. 다시 생각해보는 건 어때?")
         else:
             await ctx.message.delete()
             deleted = await ctx.channel.purge(limit=purge)
@@ -253,7 +263,8 @@ class Management(commands.Cog, name="Management"):
             await o.close()
             await ctx.message.add_reaction("<:cs_yes:659355468715786262>")
         else:
-            raise commands.BadArgument
+            await o.close()
+            await ctx.message.add_reaction("<:cs_trash:659355468631769101>")
 
     @commands.command(name="슬로우", aliases=["슬로우모드"])
     @commands.has_role(719061173567488010)
@@ -269,9 +280,9 @@ class Management(commands.Cog, name="Management"):
                 await ctx.channel.edit(slowmode_delay=number)
                 await ctx.send(f":hourglass: {ctx.author.mention} - 가끔은 느린 게 필요할 때도 있겠지. **{number}**초 정도면 적당한 것 같아?")
             else:
-                embed = discord.Embed(title="", description=f"보통 그렇게까지 느리게 할 필요는 없긴 한데, 하겠다면 말리진 않을게.\n진짜로 이 채널의 딜레이를 **{number}**초로 바꿀거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                embed = discord.Embed(title="잠깐만, 진짜로 하게?", description=f"보통 그렇게까지 느리게 할 필요는 없긴 한데, 하겠다면 말리진 않을게.\n진짜로 이 채널의 딜레이를 **{number}**초로 바꿀거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                 embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                embed.set_footer(text="Project. SMT v1.4")
+                embed.set_footer(text="Project. SMT v1.2.1")
                 msg = await ctx.send(embed=embed)
                 await msg.add_reaction("<:cs_yes:659355468715786262>")
                 await msg.add_reaction("<:cs_no:659355468816187405>")

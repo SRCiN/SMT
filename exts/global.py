@@ -22,23 +22,26 @@ class Global(commands.Cog, name="범용"):
             return
         elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.BadArgument):
             if isinstance(error, commands.MemberNotFound) or isinstance(error, commands.UserNotFound):
-                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)라는 값과 관련된 유저를 발견하지 못했습니다.")
+                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)랑 관련된 사람을 못 찾았어. 확인하고 다시 해줄래?")
             elif isinstance(error, commands.ChannelNotFound):
-                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)라는 값과 관련된 채널을 발견하지 못했습니다.")
+                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)랑 관련된 채널을 못 찾았어. 확인하고 다시 해줄래?")
             elif isinstance(error, commands.ChannelNotReadable):
-                await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - `{error.argument}`(이)라는 값과 관련된 유저를 발견하지 못했습니다.")
+                await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - `{error.argument}`(이)랑 관련된 채널은 내가 접근할 수 없는 것 같아.")
             elif isinstance(error, commands.RoleNotFound):
-                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)라는 값과 관련된 유저를 발견하지 못했습니다.")
+                await ctx.send(f":mag_right: {ctx.author.mention} - `{error.argument}`(이)랑 관련된 역할을 못 찾았어. 확인하고 다시 해줄래?")
             else:
-                await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 지급된 값이 잘못되었습니다. 명령어 사용법을 확인해주세요.")
+                await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 어, 그게 아니었던 것 같은데. 다시 생각해보는 건 어때?")
         elif isinstance(error, commands.NotOwner):
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 이 명령어는 사용 권한이 제한됩니다. 관리자에게 문의하세요.")
-        elif isinstance(error, commands.MissingAnyRole) or isinstance(commands.MissingRole):
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 이 명령어를 사용하려면 특정한 역할이 필요합니다.")
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 미안해, 그 명령어는 아무나 사용할 수 없도록 제한되어 있어.")
+        elif isinstance(error, commands.MissingAnyRole):
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 그건 어떤 역할을 가지고 있는 사람만 사용할 수 있어. 다음에 다시 해줄래?")
+        elif isinstance(error, commands.MissingRole):
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 그건 어떤 역할을 가지고 있는 사람만 사용할 수 있어. 다음에 다시 해줄래?")
         elif isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(f":stopwatch: {ctx.author.mention} - 명령어 재사용 대기 시간입니다.{round(error.retry_after, 2)}초 후에 다시 시도하세요.")
+            await ctx.send(f":stopwatch: {ctx.author.mention} - 그건 좀 더 이따가 사용해줄래? {round(error.retry_after, 2)}초 정도 뒤면 될 거 같아.")
         else:
-            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 예기치 못한 오류로 인해 실행할 수 없었습니다. 관리자에게 문의하세요.")
+            developer = self.SMT.get_user(526958314647453706)
+            await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 미안해, 뭔가 문제가 생긴 것 같아. **{developer}**한테 한번 물어봐줄래?")
             channel = self.SMT.get_channel(783621627875164230)
             await channel.send(f'도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{error}```')
 
