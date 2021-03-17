@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Events(commands.Cog, name="Event Listeners):
+class Events(commands.Cog, name="Event Listeners"):
     def __init__(self, SMT):
         self.SMT = SMT
 
