@@ -1,7 +1,8 @@
+import locale
+
+import aiosqlite
 import discord
 from discord.ext import commands
-import aiosqlite
-import locale
 
 locale.setlocale(locale.LC_ALL, "")
 

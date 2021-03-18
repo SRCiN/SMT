@@ -1,10 +1,11 @@
-import discord
-from discord.ext import commands
-import aiosqlite
 import asyncio
-import typing
 import datetime
 import locale
+import typing
+
+import aiosqlite
+import discord
+from discord.ext import commands
 
 locale.setlocale(locale.LC_ALL, "")
 

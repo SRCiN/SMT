@@ -1,8 +1,8 @@
 import datetime
+import locale
 
 import discord
 from discord.ext import commands
-import locale
 
 locale.setlocale(locale.LC_ALL, "")
 
