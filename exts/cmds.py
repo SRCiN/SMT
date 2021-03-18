@@ -4,6 +4,8 @@ import aiosqlite
 import asyncio
 import typing
 import datetime
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 class Commands(commands.Cog, name="커스텀 커맨드"):
     def __init__(self, SMT):
