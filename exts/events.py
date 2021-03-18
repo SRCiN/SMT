@@ -1,6 +1,7 @@
+import datetime
+
 import discord
 from discord.ext import commands
-import datetime
 
 
 class Events(commands.Cog, name="Event Listeners"):
