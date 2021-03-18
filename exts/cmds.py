@@ -293,7 +293,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             if rows:
                 user = self.SMT.get_user(int(rows[0][2]))
                 await ctx.send(
-                    f"{rows[0][1]}\n \n`{user}`(이)라는 애가 알려준 건데, 무슨 문제라도 있어?")
+                    f"{rows[0][1]}\n \n`{user}`(이)라는 사람이 알려줬어! 무슨 문제라도 있어?")
             await o.close()
 
 
