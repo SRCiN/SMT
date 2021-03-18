@@ -1,7 +1,8 @@
+import locale
+
+import config
 import discord
 from discord.ext import commands
-import config
-import locale
 
 locale.setlocale(locale.LC_ALL, "")
 
