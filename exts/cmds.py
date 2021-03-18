@@ -15,16 +15,16 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
         self.SMT = SMT
 
     @commands.command(name="커맨드")
-    async def _command_management(
-        self, ctx, todo, name, *, value: typing.Optional[str] = None
-    ):
-        if (
-            "'" in ctx.message.content
-            or '"' in ctx.message.content
-            or "\\" in ctx.message.content
-            or "@everyone" in ctx.message.content
-            or "@here" in ctx.message.content
-        ):
+    async def _command_management(self,
+                                  ctx,
+                                  todo,
+                                  name,
+                                  *,
+                                  value: typing.Optional[str] = None):
+        if ("'" in ctx.message.content or '"' in ctx.message.content
+                or "\\" in ctx.message.content
+                or "@everyone" in ctx.message.content
+                or "@here" in ctx.message.content):
             return await ctx.send(
                 f"<:cs_no:659355468816187405> {ctx.author.mention} - 미안하지만, 이 명령어는 이상한 사람을 막기 위해 어떤 단어들을 사용할 수 없어."
             )
@@ -38,13 +38,13 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                 if not rows:
                     embed = discord.Embed(
                         title="잠깐만, 그거 정말 맞아?",
-                        description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
+                        description=
+                        f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
                         color=0xBE1010,
                         timestamp=datetime.datetime.utcnow(),
                     )
-                    embed.set_thumbnail(
-                        url=self.SMT.user.avatar_url_as(format="png", size=2048)
-                    )
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
+                        format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -55,12 +55,12 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
 
                     try:
                         reaction, user = await self.SMT.wait_for(
-                            "reaction_add", timeout=20, check=check
-                        )
+                            "reaction_add", timeout=20, check=check)
                     except asyncio.TimeoutError:
                         await msg.delete()
                     else:
-                        if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
+                        if str(reaction.emoji
+                               ) == "<:cs_yes:659355468715786262>":
                             await msg.delete()
                             await c.execute(
                                 f"INSERT INTO words(name, value, teachedBy, locked) VALUES('{name}', '{value}', '{ctx.author.id}', 'false')"
@@ -85,13 +85,13 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != "true":
                         embed = discord.Embed(
                             title="잠깐만, 그거 정말 맞아?",
-                            description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
+                            description=
+                            f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
                             color=0xBE1010,
                             timestamp=datetime.datetime.utcnow(),
                         )
-                        embed.set_thumbnail(
-                            url=self.SMT.user.avatar_url_as(format="png", size=2048)
-                        )
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
+                            format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -102,12 +102,12 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
 
                         try:
                             reaction, user = await self.SMT.wait_for(
-                                "reaction_add", timeout=20, check=check
-                            )
+                                "reaction_add", timeout=20, check=check)
                         except asyncio.TimeoutError:
                             await msg.delete()
                         else:
-                            if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
+                            if str(reaction.emoji
+                                   ) == "<:cs_yes:659355468715786262>":
                                 await msg.delete()
                                 await c.execute(
                                     f"UPDATE words SET value = '{value}' WHERE name = '{name}'"
@@ -142,9 +142,8 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                         color=0xBE1010,
                         timestamp=datetime.datetime.utcnow(),
                     )
-                    embed.set_thumbnail(
-                        url=self.SMT.user.avatar_url_as(format="png", size=2048)
-                    )
+                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
+                        format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -155,14 +154,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
 
                     try:
                         reaction, user = await self.SMT.wait_for(
-                            "reaction_add", timeout=20, check=check
-                        )
+                            "reaction_add", timeout=20, check=check)
                     except asyncio.TimeoutError:
                         await msg.delete()
                     else:
-                        if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
+                        if str(reaction.emoji
+                               ) == "<:cs_yes:659355468715786262>":
                             await msg.delete()
-                            await c.execute(f"DELETE FROM words WHERE name = '{name}'")
+                            await c.execute(
+                                f"DELETE FROM words WHERE name = '{name}'")
                             await o.commit()
                             await ctx.send(
                                 f"<:cs_trash:659355468631769101> {ctx.author.mention} - 알았어! `{name}` 단어를 잊어버리게 뭐, 노력은 해볼게."
@@ -188,9 +188,8 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                             color=0xBE1010,
                             timestamp=datetime.datetime.utcnow(),
                         )
-                        embed.set_thumbnail(
-                            url=self.SMT.user.avatar_url_as(format="png", size=2048)
-                        )
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
+                            format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -201,12 +200,12 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
 
                         try:
                             reaction, user = await self.SMT.wait_for(
-                                "reaction_add", timeout=20, check=check
-                            )
+                                "reaction_add", timeout=20, check=check)
                         except asyncio.TimeoutError:
                             await msg.delete()
                         else:
-                            if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
+                            if str(reaction.emoji
+                                   ) == "<:cs_yes:659355468715786262>":
                                 await msg.delete()
                                 await c.execute(
                                     f"UPDATE words SET locked = 'true' WHERE name = '{name}'"
@@ -236,13 +235,13 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != "false":
                         embed = discord.Embed(
                             title="잠깐만, 그거 정말 맞아?",
-                            description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?",
+                            description=
+                            f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?",
                             color=0xBE1010,
                             timestamp=datetime.datetime.utcnow(),
                         )
-                        embed.set_thumbnail(
-                            url=self.SMT.user.avatar_url_as(format="png", size=2048)
-                        )
+                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
+                            format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
@@ -253,12 +252,12 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
 
                         try:
                             reaction, user = await self.SMT.wait_for(
-                                "reaction_add", timeout=20, check=check
-                            )
+                                "reaction_add", timeout=20, check=check)
                         except asyncio.TimeoutError:
                             await msg.delete()
                         else:
-                            if str(reaction.emoji) == "<:cs_yes:659355468715786262>":
+                            if str(reaction.emoji
+                                   ) == "<:cs_yes:659355468715786262>":
                                 await msg.delete()
                                 await c.execute(
                                     f"UPDATE words SET locked = 'false' WHERE name = '{name}'"
@@ -293,7 +292,8 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             rows = await c.fetchall()
             if rows:
                 user = self.SMT.get_user(int(rows[0][2]))
-                await ctx.send(f"{rows[0][1]}\n \n`{user}`(이)라는 애가 알려준 건데, 무슨 문제라도 있어?")
+                await ctx.send(
+                    f"{rows[0][1]}\n \n`{user}`(이)라는 애가 알려준 건데, 무슨 문제라도 있어?")
             await o.close()
 
 
