@@ -6,7 +6,6 @@ import aiosqlite
 import datetime
 from pytz import timezone, utc
 import locale
-import typing
 locale.setlocale(locale.LC_ALL, '')
 
 class Health(commands.Cog, name="자동 자가진단"):
@@ -143,4 +142,4 @@ class Health(commands.Cog, name="자동 자가진단"):
         await o.close()
 
 def setup(SMT):
-    SMT.add_cog(Management(SMT))
+    SMT.add_cog(Health(SMT))
