@@ -7,6 +7,9 @@ SMT.remove_command('help')
 m = ['exts.global', 'exts.cmds', "jishaku", "exts.miya", "exts.events", "exts.health"]
 
 for module in m:
-    SMT.load_extension(f'{module}')
+    try:
+        SMT.load_extension(module)
+    except:
+        print(module)
 
 SMT.run(config.Token)

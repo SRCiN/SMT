@@ -3,6 +3,7 @@ from discord.ext import commands
 import aiosqlite
 import asyncio
 import typing
+import datetime
 
 class Commands(commands.Cog, name="커스텀 커맨드"):
     def __init__(self, SMT):
@@ -22,7 +23,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                 if not rows:
                     embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                     embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                    embed.set_footer(text="Project. SMT v1.2.1")
+                    embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
                     await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -50,7 +51,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != 'true':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                        embed.set_footer(text="Project. SMT v1.2.1")
+                        embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -80,7 +81,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                 if rows[0][3] != 'true':
                     embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어봐도 모른 척 하면 되는거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                     embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                    embed.set_footer(text="Project. SMT v1.2.1")
+                    embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
                     await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -109,7 +110,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != 'true':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 아무도 바꾸지 못하게 할건데, 괜찮아?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                        embed.set_footer(text="Project. SMT v1.2.1")
+                        embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
@@ -140,7 +141,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != 'false':
                         embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
                         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
-                        embed.set_footer(text="Project. SMT v1.2.1")
+                        embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
