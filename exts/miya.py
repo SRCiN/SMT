@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 import aiosqlite
 import datetime
+import asyncio
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 class Miya(commands.Cog, name="미야 관리"):
     def __init__(self, SMT):
