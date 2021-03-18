@@ -38,8 +38,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                 if not rows:
                     embed = discord.Embed(
                         title="잠깐만, 그거 정말 맞아?",
-                        description=
-                        f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
+                        description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
                         color=0xBE1010,
                         timestamp=datetime.datetime.utcnow(),
                     )
@@ -85,8 +84,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != "true":
                         embed = discord.Embed(
                             title="잠깐만, 그거 정말 맞아?",
-                            description=
-                            f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
+                            description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```",
                             color=0xBE1010,
                             timestamp=datetime.datetime.utcnow(),
                         )
@@ -235,8 +233,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                     if rows[0][3] != "false":
                         embed = discord.Embed(
                             title="잠깐만, 그거 정말 맞아?",
-                            description=
-                            f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?",
+                            description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?",
                             color=0xBE1010,
                             timestamp=datetime.datetime.utcnow(),
                         )
