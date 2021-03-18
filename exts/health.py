@@ -1,11 +1,12 @@
-import discord
-from discord.ext import commands, tasks
 import asyncio
-import hcskr
-import aiosqlite
 import datetime
-from pytz import timezone, utc
 import locale
+
+import aiosqlite
+import discord
+import hcskr
+from discord.ext import commands, tasks
+from pytz import timezone, utc
 
 locale.setlocale(locale.LC_ALL, "")
 
