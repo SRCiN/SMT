@@ -40,11 +40,11 @@ class Miya(commands.Cog, name="미야 관리"):
                 if word in msg.content and msg.channel.id != 663806592277545005:
                     try:
                         await msg.author.send(
-                            f"<:cs_stop:665173353874587678> {msg.author.mention} - 서버에 접속해 있었던 기간이 5일 미만이고, {text}일 부적절한 언행을 사용하셔서 차단되셨습니다."
+                            f"<:cs_stop:665173353874587678> {msg.author.mention} - 서버에 접속해 있었던 기간이 5일 미만이고, 부적절한 언행을 사용하셔서 차단되셨습니다!"
                         )
                     except:
                         await msg.reply(
-                            f"<:cs_stop:665173353874587678> 서버에 접속해 있었던 기간이 5일 미만이고, {text}일 부적절한 언행을 사용하셔서 차단당했습니다."
+                            f"<:cs_stop:665173353874587678> 서버에 접속해 있었던 기간이 5일 미만이고, 부적절한 언행을 사용하셔서 차단되셨습니다!"
                         )
                     await msg.guild.ban(
                         msg.author,
@@ -143,12 +143,12 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
             embed = discord.Embed(
                 title=f"{msg.author}님의 새 문의 스레드",
                 description=f"사유 : {msg.content}\n티켓을 닫으려면 아래에 있는 반응을 누르세요.",
-                color=0xAFFDEF,
+                color=0xBE1010,
                 timestamp=datetime.datetime.utcnow(),
             )
             embed.set_thumbnail(
                 url=msg.author.avatar_url_as(static_format="png", size=2048))
-            embed.set_footer(text="지원 스레드", icon_url=self.SMT.user.avatar_url)
+            embed.set_footer(text="Project. SMT v1.4", icon_url=self.SMT.user.avatar_url)
             msg = await channel.send("@here", embed=embed)
             await msg.add_reaction("<:cs_leave:659355468803866624>")
             await msg.pin()
