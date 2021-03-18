@@ -47,7 +47,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                         )
                         embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
                             format="png", size=2048))
-                        embed.set_footer(text="Project. SMT v1.2.1")
+                        embed.set_footer(text="Project. SMT v1.4")
                         try:
                             await user.send(user.mention, embed=embed)
                         except:
@@ -62,11 +62,11 @@ class Health(commands.Cog, name="자동 자가진단"):
                     )
                     embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
                         format="png", size=2048))
-                    embed.set_footer(text="Project. SMT v1.2.1")
+                    embed.set_footer(text="Project. SMT v1.4")
                     try:
                         await user.send(user.mention, embed=embed)
                     except:
-                        print("DM X")
+                        print("DM Failed.")
             await debug.send(
                 f"다 됐어! 이번 시도에서는...\n{len(rows)}명을 시도했어.\n성공은 {success}명, 실패는 {len(rows) - success}명이야!"
             )
@@ -221,9 +221,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                     f"<:cs_id:659355469034422282> {ctx.author.mention} - 알림 설정은 먼저 네 프로필을 등록하고 바꿔줄래?"
                 )
         else:
-            await ctx.send(
-                f"<:cs_no:659355468816187405> {ctx.author.mention} - 어, 그게 아니었던 것 같은데. 다시 생각해보는 건 어때?"
-            )
+            raise commands.BadArgument
         await o.close()
 
 
