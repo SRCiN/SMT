@@ -7,6 +7,7 @@ import datetime
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
+
 class Commands(commands.Cog, name="커스텀 커맨드"):
     def __init__(self, SMT):
         self.SMT = SMT
@@ -15,7 +16,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
     async def _command_management(self, ctx, todo, name, *, value: typing.Optional[str] = None):
         if "'" in ctx.message.content or '"' in ctx.message.content or "\\" in ctx.message.content or "@everyone" in ctx.message.content or "@here" in ctx.message.content:
             return await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 미안하지만, 이 명령어는 이상한 사람을 막기 위해 어떤 단어들을 사용할 수 없어.")
-            
+
         o = await aiosqlite.connect("SMT.db")
         c = await o.cursor()
         await c.execute(f"SELECT * FROM `words` WHERE `name` = '{name}'")
@@ -23,12 +24,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
         if todo == "추가":
             if value is not None:
                 if not rows:
-                    embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
+                    embed = discord.Embed(
+                        title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                    embed.set_thumbnail(
+                        url=self.SMT.user.avatar_url_as(format='png', size=2048))
                     embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
                     await msg.add_reaction("<:cs_no:659355468816187405>")
+
                     def check(reaction, user):
                         return reaction.message.id == msg.id and user == ctx.author
                     try:
@@ -51,12 +55,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             if value is not None:
                 if rows:
                     if rows[0][3] != 'true':
-                        embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
+                        embed = discord.Embed(
+                            title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어보면 이렇게 말해주면 되는 거 맞지?\n```{value}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                        embed.set_thumbnail(
+                            url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
+
                         def check(reaction, user):
                             return reaction.message.id == msg.id and user == ctx.author
                         try:
@@ -81,12 +88,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
         elif todo == "삭제":
             if rows:
                 if rows[0][3] != 'true':
-                    embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어봐도 모른 척 하면 되는거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
+                    embed = discord.Embed(
+                        title="잠깐만, 그거 정말 맞아?", description=f"`{name}`(이)라고 물어봐도 모른 척 하면 되는거야?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                    embed.set_thumbnail(
+                        url=self.SMT.user.avatar_url_as(format='png', size=2048))
                     embed.set_footer(text="Project. SMT v1.4")
                     msg = await ctx.send(ctx.author.mention, embed=embed)
                     await msg.add_reaction("<:cs_yes:659355468715786262>")
                     await msg.add_reaction("<:cs_no:659355468816187405>")
+
                     def check(reaction, user):
                         return reaction.message.id == msg.id and user == ctx.author
                     try:
@@ -110,12 +120,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             if staff in ctx.author.roles:
                 if rows:
                     if rows[0][3] != 'true':
-                        embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 아무도 바꾸지 못하게 할건데, 괜찮아?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
+                        embed = discord.Embed(
+                            title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 아무도 바꾸지 못하게 할건데, 괜찮아?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                        embed.set_thumbnail(
+                            url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
+
                         def check(reaction, user):
                             return reaction.message.id == msg.id and user == ctx.author
                         try:
@@ -141,12 +154,15 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             if staff in ctx.author.roles:
                 if rows:
                     if rows[0][3] != 'false':
-                        embed = discord.Embed(title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format='png', size=2048))
+                        embed = discord.Embed(
+                            title="잠깐만, 그거 정말 맞아?", description=f"`{name}` 단어를 누구나 바꿀 수 있게 될 거야. 상관 없지?", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                        embed.set_thumbnail(
+                            url=self.SMT.user.avatar_url_as(format='png', size=2048))
                         embed.set_footer(text="Project. SMT v1.4")
                         msg = await ctx.send(ctx.author.mention, embed=embed)
                         await msg.add_reaction("<:cs_yes:659355468715786262>")
                         await msg.add_reaction("<:cs_no:659355468816187405>")
+
                         def check(reaction, user):
                             return reaction.message.id == msg.id and user == ctx.author
                         try:
@@ -168,7 +184,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
             else:
                 await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 그건 어떤 역할을 가지고 있는 사람만 사용할 수 있어. 다음에 다시 해줄래?")
         await o.close()
-    
+
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
@@ -181,6 +197,7 @@ class Commands(commands.Cog, name="커스텀 커맨드"):
                 user = self.SMT.get_user(int(rows[0][2]))
                 await ctx.send(f"{rows[0][1]}\n \n`{user}`(이)라는 애가 알려준 건데, 무슨 문제라도 있어?")
             await o.close()
+
 
 def setup(SMT):
     SMT.add_cog(Commands(SMT))
