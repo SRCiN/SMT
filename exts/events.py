@@ -108,7 +108,7 @@ class Events(commands.Cog, name="Event Listeners"):
                     )
                     embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
                         format="png", size=2048))
-                    embed.set_footer(text="Project. SMT v1.2.1")
+                    embed.set_footer(text="Project. SMT v1.4")
                     await member.send(member.mention, embed=embed)
                 except discord.Forbidden:
                     print("DM Failed.")
