@@ -6,6 +6,7 @@ import asyncio
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
+
 class Miya(commands.Cog, name="미야 관리"):
     def __init__(self, SMT):
         self.SMT = SMT
@@ -49,7 +50,8 @@ class Miya(commands.Cog, name="미야 관리"):
         if member.guild.id == 564418977627897887:
             now = datetime.datetime.utcnow()
             delay = now - member.created_at
-            limit = datetime.datetime(2020, 8, 20) - datetime.datetime(2020, 8, 17)
+            limit = datetime.datetime(2020, 8, 20) - \
+                datetime.datetime(2020, 8, 17)
             text = str(delay).split(".")[0]
             if delay <= limit:
                 try:
@@ -60,10 +62,11 @@ class Miya(commands.Cog, name="미야 관리"):
                     await asyncio.sleep(3)
                 await member.guild.kick(member, reason="계정이 활동한 기간이 너무 짧습니다!")
 
+
 class Ticket(commands.Cog, name="티켓 지원 시스템"):
     def __init__(self, SMT):
         self.SMT = SMT
-    
+
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         if payload.member.bot:
@@ -81,12 +84,12 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
                     await member.send(f"<:cs_leave:659355468803866624> {member.mention} - 스레드가 종료되었어요. 활성화하려면 `@Project. SMT#2979 티켓 {ch.id}` 명령어를 사용해주세요.")
                 except:
                     print("Discord 개인 메시지가 차단되어 전송하지 않았습니다.")
-    
+
     @commands.Cog.listener()
     async def on_message(self, msg):
         if msg.author.bot:
             return
-        
+
         if msg.channel.id == 663806592277545005:
             await msg.delete()
             category = msg.guild.get_channel(821698815944818708)
@@ -105,8 +108,10 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
                 number += "0"
             number += str(rows[0][1])
             channel = await category.create_text_channel(name=f"스레드_{number}", overwrites=overwrites, topic=msg.author.id)
-            embed = discord.Embed(title=f"{msg.author}님의 새 문의 스레드", description=f"사유 : {msg.content}\n티켓을 닫으려면 아래에 있는 반응을 누르세요.", color=0xAFFDEF, timestamp=datetime.datetime.utcnow())
-            embed.set_thumbnail(url=msg.author.avatar_url_as(static_format="png", size=2048))
+            embed = discord.Embed(title=f"{msg.author}님의 새 문의 스레드", description=f"사유 : {msg.content}\n티켓을 닫으려면 아래에 있는 반응을 누르세요.",
+                                  color=0xAFFDEF, timestamp=datetime.datetime.utcnow())
+            embed.set_thumbnail(url=msg.author.avatar_url_as(
+                static_format="png", size=2048))
             embed.set_footer(text="지원 스레드", icon_url=self.SMT.user.avatar_url)
             msg = await channel.send("@here", embed=embed)
             await msg.add_reaction("<:cs_leave:659355468803866624>")
@@ -114,7 +119,7 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
             await c.execute(f'UPDATE shark SET number = {int(rows[0][1]) + 1}')
             await o.commit()
             await o.close()
-    
+
     @commands.command(name="티켓")
     async def _reopen(self, ctx, channel: discord.TextChannel):
         if channel.name.startswith("종료됨_"):
@@ -122,7 +127,8 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
                 member = ctx.guild.get_member(int(channel.topic))
                 name = channel.name.replace("종료됨", "스레드")
                 await channel.edit(name=name)
-                overwrite = discord.PermissionOverwrite(read_messages=True, send_messages=True, manage_channels=True, manage_roles=True)
+                overwrite = discord.PermissionOverwrite(
+                    read_messages=True, send_messages=True, manage_channels=True, manage_roles=True)
                 await channel.set_permissions(member, overwrite=overwrite)
                 message = None
                 async for msg in channel.history(limit=500):
@@ -130,6 +136,7 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
                         message = msg
                 await message.reply("<:cs_yes:659355468715786262> @here - 스레드가 티켓 관리자에 의해 다시 활성화됐습니다.")
                 await ctx.message.add_reaction("<:cs_yes:659355468715786262>")
+
 
 def setup(SMT):
     SMT.add_cog(Ticket(SMT))

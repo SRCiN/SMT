@@ -8,6 +8,7 @@ from pytz import timezone, utc
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
+
 class Health(commands.Cog, name="자동 자가진단"):
     def __init__(self, SMT):
         self.SMT = SMT
@@ -33,16 +34,20 @@ class Health(commands.Cog, name="자동 자가진단"):
                 if hcs['code'] == "SUCCESS":
                     success += 1
                     if row[2] == "true":
-                        embed = discord.Embed(title="완료했어! 좋은 하루 보내.", description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```", color=0x1F44BF, timestamp=datetime.datetime.utcnow())
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
+                        embed = discord.Embed(
+                            title="완료했어! 좋은 하루 보내.", description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```", color=0x1F44BF, timestamp=datetime.datetime.utcnow())
+                        embed.set_thumbnail(
+                            url=self.SMT.user.avatar_url_as(format="png", size=2048))
                         embed.set_footer(text="Project. SMT v1.2.1")
                         try:
                             await user.send(user.mention, embed=embed)
                         except:
                             print("DM Failed.")
                 else:
-                    embed = discord.Embed(title="미안해, 뭔가 잘못된 거 같아.", description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(format="png", size=2048))
+                    embed = discord.Embed(
+                        title="미안해, 뭔가 잘못된 거 같아.", description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```", color=0xBE1010, timestamp=datetime.datetime.utcnow())
+                    embed.set_thumbnail(
+                        url=self.SMT.user.avatar_url_as(format="png", size=2048))
                     embed.set_footer(text="Project. SMT v1.2.1")
                     try:
                         await user.send(user.mention, embed=embed)
@@ -79,6 +84,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                         f":stopwatch: {ctx.author.mention} - 자가진단을 해주기 위한 비밀번호를 말해줘. Ex) 1234",
                     ]
                     queue = await ctx.send(messages[i])
+
                     def check(msg):
                         return msg.author == ctx.author and msg.channel == ctx.channel
                     try:
@@ -140,6 +146,7 @@ class Health(commands.Cog, name="자동 자가진단"):
         else:
             await ctx.send(f"<:cs_no:659355468816187405> {ctx.author.mention} - 어, 그게 아니었던 것 같은데. 다시 생각해보는 건 어때?")
         await o.close()
+
 
 def setup(SMT):
     SMT.add_cog(Health(SMT))
