@@ -3,6 +3,7 @@ from discord.ext import commands
 import aiosqlite
 import asyncio
 import typing
+import datetime
 
 class Commands(commands.Cog, name="커스텀 커맨드"):
     def __init__(self, SMT):
