@@ -13,7 +13,10 @@ SMT = commands.Bot(
     chunk_guilds_at_startup=True,
     intents=discord.Intents.all(),
 )
-m = ["exts.global", "exts.cmds", "jishaku", "exts.miya", "exts.events", "exts.health"]
+m = [
+    "exts.global", "exts.cmds", "jishaku", "exts.miya", "exts.events",
+    "exts.health"
+]
 
 for module in m:
     try:
