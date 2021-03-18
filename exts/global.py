@@ -1,6 +1,11 @@
+import locale
+
+import aiosqlite
 import discord
 from discord.ext import commands
-import aiosqlite
+
+locale.setlocale(locale.LC_ALL, "")
+
 
 class Global(commands.Cog, name="범용"):
     def __init__(self, SMT):
@@ -32,6 +37,7 @@ class Global(commands.Cog, name="범용"):
         else:
             await o.close()
             await ctx.message.add_reaction("<:cs_trash:659355468631769101>")
+
 
 def setup(SMT):
     SMT.add_cog(Global(SMT))
