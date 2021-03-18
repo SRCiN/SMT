@@ -148,7 +148,8 @@ class Ticket(commands.Cog, name="티켓 지원 시스템"):
             )
             embed.set_thumbnail(
                 url=msg.author.avatar_url_as(static_format="png", size=2048))
-            embed.set_footer(text="Project. SMT v1.4", icon_url=self.SMT.user.avatar_url)
+            embed.set_footer(text="Project. SMT v1.4",
+                             icon_url=self.SMT.user.avatar_url)
             msg = await channel.send("@here", embed=embed)
             await msg.add_reaction("<:cs_leave:659355468803866624>")
             await msg.pin()
