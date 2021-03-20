@@ -3,6 +3,7 @@ import locale
 import config
 import discord
 from discord.ext import commands
+from discord_slash import SlashCommand
 
 locale.setlocale(locale.LC_ALL, "")
 
@@ -13,6 +14,7 @@ SMT = commands.Bot(
     chunk_guilds_at_startup=True,
     intents=discord.Intents.all(),
 )
+slash = SlashCommand(SMT, sync_commands=True)
 m = [
     "exts.global", "exts.cmds", "jishaku", "exts.miya", "exts.events",
     "exts.health"
