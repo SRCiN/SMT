@@ -40,8 +40,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                     if row[3] == "true":
                         embed = discord.Embed(
                             title="완료했어! 좋은 하루 보내.",
-                            description=
-                            f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```",
+                            description=f"이렇다는데, 솔직히 잘 모르겠어.\n```{hcs['code']} : {hcs['message']}```",
                             color=0x1F44BF,
                             timestamp=datetime.datetime.utcnow(),
                         )
@@ -55,8 +54,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                 else:
                     embed = discord.Embed(
                         title="미안해, 뭔가 잘못된 거 같아.",
-                        description=
-                        f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```",
+                        description=f"내가 기대했던 결과랑 좀 다른 것 같은데.\n```{hcs['code']} : {hcs['message']}```",
                         color=0xBE1010,
                         timestamp=datetime.datetime.utcnow(),
                     )
@@ -111,8 +109,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                                                       check=check)
                     except asyncio.TimeoutError:
                         await queue.edit(
-                            content=
-                            f":hourglass: {ctx.author.mention} - 아, 미안해. 바빠서 못 들었어. 다시 해줄래?",
+                            content=f":hourglass: {ctx.author.mention} - 아, 미안해. 바빠서 못 들었어. 다시 해줄래?",
                             delete_after=3,
                         )
                         break
@@ -138,8 +135,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                     await debug.send(
                         f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
                     await asdf.edit(
-                        content=
-                        f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```",
+                        content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```",
                         delete_after=5,
                     )
                 else:
@@ -150,14 +146,12 @@ class Health(commands.Cog, name="자동 자가진단"):
                             f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{hcs_token['code']} : {hcs_token['message']}```"
                         )
                         await asdf.edit(
-                            content=
-                            f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n내가 생각했던 것과는 뭔가 다른 답을 받았네. ```{hcs_token['code']} : {hcs_token['message']}```",
+                            content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n내가 생각했던 것과는 뭔가 다른 답을 받았네. ```{hcs_token['code']} : {hcs_token['message']}```",
                             delete_after=5,
                         )
                     else:
                         await asdf.edit(
-                            content=
-                            f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 다 됐는데..\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중"
+                            content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 거의 다 됐는데..\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <a:cs_wait:659355470418411521> 진행 중"
                         )
                         await asyncio.sleep(1)
                         try:
@@ -171,14 +165,12 @@ class Health(commands.Cog, name="자동 자가진단"):
                                 f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```"
                             )
                             await asdf.edit(
-                                content=
-                                f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n음, 등록이 안 된 거 같네. 다시 해볼래? ```{e}```",
+                                content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_no:659355468816187405> 실패\n \n음, 등록이 안 된 거 같네. 다시 해볼래? ```{e}```",
                                 delete_after=5,
                             )
                         else:
                             await asdf.edit(
-                                content=
-                                f"<:cs_id:659355469034422282> {ctx.author.mention} - 다 됐어!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 등록 다 됐어! 매일 7시에 자가진단을 내가 대신 해줄거야.",
+                                content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 다 됐어!\n자가진단 테스트 및 정보 암호화 : <:cs_yes:659355468715786262> 완료\nSQLite 시스템에 등록 : <:cs_yes:659355468715786262> 완료\n \n<:cs_sent:659355469684539402> 등록 다 됐어! 매일 7시에 자가진단을 내가 대신 해줄거야.",
                                 delete_after=5,
                             )
             else:
