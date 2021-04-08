@@ -44,8 +44,9 @@ class Health(commands.Cog, name="자동 자가진단"):
                             color=0x1F44BF,
                             timestamp=datetime.datetime.utcnow(),
                         )
-                        embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
-                            format="png", size=2048))
+                        embed.set_thumbnail(
+                            url=self.SMT.user.avatar_url_as(format="png", size=2048)
+                        )
                         embed.set_footer(text="Project. SMT v1.4")
                         try:
                             await user.send(user.mention, embed=embed)
@@ -58,8 +59,9 @@ class Health(commands.Cog, name="자동 자가진단"):
                         color=0xBE1010,
                         timestamp=datetime.datetime.utcnow(),
                     )
-                    embed.set_thumbnail(url=self.SMT.user.avatar_url_as(
-                        format="png", size=2048))
+                    embed.set_thumbnail(
+                        url=self.SMT.user.avatar_url_as(format="png", size=2048)
+                    )
                     embed.set_footer(text="Project. SMT v1.4")
                     try:
                         await user.send(user.mention, embed=embed)
@@ -81,8 +83,7 @@ class Health(commands.Cog, name="자동 자가진단"):
         await ctx.message.delete()
         o = await aiosqlite.connect("SMT.db")
         c = await o.cursor()
-        await c.execute(f"SELECT * FROM health WHERE user_id = {ctx.author.id}"
-                        )
+        await c.execute(f"SELECT * FROM health WHERE user_id = {ctx.author.id}")
         rows = await c.fetchall()
         if todo == "추가":
             if not rows:
@@ -104,9 +105,9 @@ class Health(commands.Cog, name="자동 자가진단"):
                         return msg.author == ctx.author and msg.channel == ctx.channel
 
                     try:
-                        msg = await self.SMT.wait_for("message",
-                                                      timeout=30,
-                                                      check=check)
+                        msg = await self.SMT.wait_for(
+                            "message", timeout=30, check=check
+                        )
                     except asyncio.TimeoutError:
                         await queue.edit(
                             content=f":hourglass: {ctx.author.mention} - 아, 미안해. 바빠서 못 들었어. 다시 해줄래?",
@@ -132,8 +133,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                     )
                 except Exception as e:
                     debug = self.SMT.get_channel(783621627875164230)
-                    await debug.send(
-                        f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
+                    await debug.send(f"도와주고 있는데, 문제가 좀 생긴 것 같아. 네가 확인해줄래? ```{e}```")
                     await asdf.edit(
                         content=f"<:cs_id:659355469034422282> {ctx.author.mention} - 음, 실패한 것 같네.\n자가진단 테스트 및 정보 암호화 : <:cs_no:659355468816187405> 실패\n \n뭔가 잘못 실행된 거 같아. ```{e}```",
                         delete_after=5,
@@ -179,8 +179,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                 )
         elif todo == "삭제":
             if rows:
-                await c.execute(
-                    f"DELETE FROM health WHERE user_id = '{ctx.author.id}'")
+                await c.execute(f"DELETE FROM health WHERE user_id = '{ctx.author.id}'")
                 await o.commit()
                 await ctx.send(
                     f"<:cs_trash:659355468631769101> {ctx.author.mention} - 더 이상 필요없는 기능이야? 삭제는 해뒀어. 언제든 다시 등록할 수 있어!"
