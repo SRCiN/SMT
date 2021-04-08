@@ -5,8 +5,10 @@ import locale
 import aiosqlite
 import discord
 import hcskr
-from discord.ext import commands, tasks
-from pytz import timezone, utc
+from discord.ext import commands
+from discord.ext import tasks
+from pytz import timezone
+from pytz import utc
 
 locale.setlocale(locale.LC_ALL, "")
 
