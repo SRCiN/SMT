@@ -34,7 +34,8 @@ class Health(commands.Cog, name="자동 자가진단"):
             success = 0
             for row in rows:
                 user = self.SMT.get_user(int(row[0]))
-                hcs = await hcskr.asyncTokenSelfCheck(row[1], customloginname=row[2])
+                hcs = await hcskr.asyncTokenSelfCheck(row[1],
+                                                      customloginname=row[2])
                 if hcs["code"] == "SUCCESS":
                     success += 1
                     if row[3] == "true":
