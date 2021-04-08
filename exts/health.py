@@ -34,10 +34,10 @@ class Health(commands.Cog, name="자동 자가진단"):
             success = 0
             for row in rows:
                 user = self.SMT.get_user(int(row[0]))
-                hcs = await hcskr.asyncTokenSelfCheck(row[1])
+                hcs = await hcskr.asyncTokenSelfCheck(row[1], customloginname=row[2])
                 if hcs["code"] == "SUCCESS":
                     success += 1
-                    if row[2] == "true":
+                    if row[3] == "true":
                         embed = discord.Embed(
                             title="완료했어! 좋은 하루 보내.",
                             description=
@@ -131,7 +131,6 @@ class Health(commands.Cog, name="자동 자가진단"):
                         level=info[2],
                         area=info[3],
                         schoolname=info[4],
-                        customloginname=info[5],
                         password=info[6],
                     )
                 except Exception as e:
@@ -163,7 +162,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                         await asyncio.sleep(1)
                         try:
                             await c.execute(
-                                f"INSERT INTO health(user_id, token, notify) VALUES('{ctx.author.id}', '{hcs_token['token']}', 'true')"
+                                f"INSERT INTO health(user_id, token, custom, notify) VALUES('{ctx.author.id}', '{hcs_token['token']}', '{info[5]}', 'true')"
                             )
                             await o.commit()
                         except Exception as e:
