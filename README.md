@@ -2,4 +2,4 @@
 
 a.k.a. Shark1ight Moderation Tools
 
-개인용 관리툴
+미야 서버랑 뭐 어쩌고를 관리함
