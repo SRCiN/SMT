@@ -200,7 +200,7 @@ class Health(commands.Cog, name="자동 자가진단"):
                 )
         elif todo == "알림":
             if rows:
-                if rows[0][2] == "true":
+                if rows[0][3] == "true":
                     await c.execute(
                         f"UPDATE health SET notify = 'false' WHERE user_id = '{ctx.author.id}'"
                     )
